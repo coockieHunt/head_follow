@@ -1,6 +1,5 @@
 import './App.css';
 import './styles/skull.css'
-import './styles/quote.css'
 import './styles/quoteBlock.css'
 
 import FollowObjectDown from './components/followObjectDown.jsx';
