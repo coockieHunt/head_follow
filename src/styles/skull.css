@@ -10,6 +10,10 @@
   ;
 
   img{
+    user-select: none;  
+    pointer-events: none; 
+    -webkit-user-drag: none; 
+
     --img_min: 40vw;
     --img_preferred: 25vh;
     --img_max: 40vw;
@@ -21,7 +25,6 @@
     object-fit: contain;
     width: auto;
 
-    /* Combine all transforms in one declaration */
     transform: 
       rotateY(180deg) 
       rotateZ(40deg);

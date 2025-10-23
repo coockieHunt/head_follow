@@ -15,6 +15,9 @@ function App() {
             “ {quoteText}”
           </span>
           {<FollowObjectDown />}
+          <div style={{ position: 'fixed', bottom: '10px', right: '10px', fontSize: '12px', color: '#666' }}>
+            Created by <a href="https://jonathangleyze.fr">jonathangleyze.fr</a>
+          </div>
         </>
       }
     </>
