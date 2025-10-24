@@ -8,6 +8,9 @@ A simple React application for displaying quotes with interactive mouse-followin
 - Dynamic rotation based on cursor position
 - Smooth animation with customizable parameters
 - Quote display component
+- smoth sound interact
+- muted btn
+- copy quote
 
 ## Installation
 
@@ -36,10 +39,6 @@ npm run build
 ## Todo List
 - add loading animation
 
-- Add animated icon when copying a quote
-
-- add btn for mute sond
-
 - Add smooth dust animation
 
 - Add auto-scroll to the next/previous button
@@ -52,3 +51,7 @@ freesound_community write song (Sound Effect by <a href="https://pixabay.com/use
 
 (_skull svg_)
 Image by <a href="https://pixabay.com/users/openclipart-vectors-30363/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2028284">OpenClipart-Vectors</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2028284">Pixabay</a>
+
+## Icons
+
+- FontAwesome <a href="https://fontawesome.com/"> here </a>
