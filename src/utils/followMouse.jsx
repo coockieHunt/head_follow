@@ -15,8 +15,6 @@
  */
 
 function followMouse(element, options = {}) {
-    console.log('Following mouse for element:', element);
-
     const {
         invert = false,
         rotationConfig = {min: 60, max: -30, neutral: 40},

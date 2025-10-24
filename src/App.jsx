@@ -1,11 +1,15 @@
 import './App.css';
 import './styles/skull.css'
 import './styles/quoteBlock.css'
+import './styles/skeleton/header.css'
 
 import FollowObjectDown from './components/followObjectDown.jsx';
 import TopNotifier from './components/topNotifier.jsx';
 import copyQuote from './utils/copyQuote.jsx';
 import { useState } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faVolumeOff, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+import PlayClickSound from './utils/interactSond.jsx';
 
 const curQuoteText = `Look up at the stars and not down at your feet. Try to make sense of what you see, and wonder about what makes the universe exist. Be curious.`;
 
@@ -14,19 +18,27 @@ function App() {
 const [AlertText, setAlertText] = useState("");
 const [notifierTrigger, setNotifierTrigger] = useState(0);
 
+const [muted, setMuted] = useState(false);
+
   function handleCopyQuote() {
-    copyQuote(curQuoteText);
+    copyQuote({quote: curQuoteText, muted});
     setAlertText("Quote copied!");
     setNotifierTrigger(t => t + 1); 
   }
 
+  const icon_multiplier_class = "fa-2x";
+  const icon_disabled_class = muted ? "mute-button sound_off" : "mute-button";
   return (
     <>
-      {
-        <>
+      {<> 
+        <div className="header">
+          <button onClick={() => (setMuted(!muted), PlayClickSound())} className={icon_disabled_class}>
+            {muted ?  <FontAwesomeIcon icon={faVolumeOff} className={icon_multiplier_class} /> : <FontAwesomeIcon icon={faVolumeUp} className={icon_multiplier_class} />}
+          </button>
+        </div>
         <div id='QuoteBlock'>
           <span id='AlertText'>{<TopNotifier message={AlertText} trigger={notifierTrigger}/>}</span>
-          <span id="quoteText" onClick={handleCopyQuote}>
+          <span id="quoteText" onClick={handleCopyQuote} >
             “ {curQuoteText} ”
           </span>
         </div>
