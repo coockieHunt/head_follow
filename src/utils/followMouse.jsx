@@ -24,35 +24,49 @@ function followMouse(element, options = {}) {
 
     let targetRotation = rotationConfig.neutral;
 
-    function onMouseMove(event) {
-        const mouseY = event.clientY;
-
+    function handleMove(y) {
         // calculate relative Y position
         const windowHeight = window.innerHeight;
-        const relativeY = mouseY / windowHeight; 
+        const relativeY = y / windowHeight;
 
         //interpolate rotation
         const rotation = rotationConfig.min + (rotationConfig.max - rotationConfig.min) * relativeY;
 
         // apply options bool
         const rotateY = invert ? 'rotateY(180deg) ' : '';
-
-
         function lerp(start, end, t) {
             return start + (end - start) * t;
         }
 
         // Smoothly animate towards target rotation
         targetRotation = lerp(targetRotation, rotation, animateSmoothly);
-
+        
         // Update element transform
         element.style.transform = `
             ${rotateY} 
             rotateZ(${targetRotation.toFixed(2)}deg)
         `;
     }
-    
+
+    function onMouseMove(event) {
+        handleMove(event.clientY);
+    }
+
+    function onTouchMove(event) {
+        if (event.touches && event.touches.length > 0) {
+            handleMove(event.touches[0].clientY);
+        }
+    }
+
+    function onTouchStart(event) {
+        if (event.touches && event.touches.length > 0) {
+            handleMove(event.touches[0].clientY);
+        }
+    }
+
     window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('touchmove', onTouchMove);
+    window.addEventListener('touchstart', onTouchStart);
 }
 
 export default followMouse;

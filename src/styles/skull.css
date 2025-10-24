@@ -4,11 +4,17 @@
   left: 16px;
   z-index: 1000;
 
+  transition: transform 1s ease-in-out;
+
+
   transform: 
     translateX(-43%)
     translateY(+30%)
   ;
 
+   &:hover {
+      transform: scale(0.9);
+    }
   img{
     user-select: none;  
     pointer-events: none; 
@@ -28,6 +34,8 @@
     transform: 
       rotateY(180deg) 
       rotateZ(40deg);
+
+   
   }
   
 }
