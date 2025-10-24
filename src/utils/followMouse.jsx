@@ -23,7 +23,6 @@ function followMouse(element, options = {}) {
 
 
     let targetRotation = rotationConfig.neutral;
-    let currentRotation = rotationConfig.neutral;
 
     function onMouseMove(event) {
         const mouseY = event.clientY;
@@ -38,7 +37,6 @@ function followMouse(element, options = {}) {
         // apply options bool
         const rotateY = invert ? 'rotateY(180deg) ' : '';
 
-        currentRotation = mouseY;
 
         function lerp(start, end, t) {
             return start + (end - start) * t;
