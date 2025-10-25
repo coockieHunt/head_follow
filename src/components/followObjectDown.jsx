@@ -21,6 +21,7 @@ const FollowObjectDown = ({muted}) => {
         setIsSkullOne(!isSkullOne);
         if(!muted){
             const audio = new Audio(SondSwitch);
+            audio.volume = 0.2;
             audio.play();
         }
     }
