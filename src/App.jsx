@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeOff, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
 import PlayClickSound from './utils/interactSond.jsx';
+import DustFlow from './components/dustFlow.jsx';
 
 const curQuoteText = `Look up at the stars and not down at your feet. Try to make sense of what you see, and wonder about what makes the universe exist. Be curious.`;
 
@@ -31,6 +32,7 @@ const [muted, setMuted] = useState(false);
   return (
     <>
       {<> 
+        <DustFlow />
         <div className="header">
           <button onClick={() => (setMuted(!muted), PlayClickSound())} className={icon_disabled_class}>
             {muted ?  <FontAwesomeIcon icon={faVolumeOff} className={icon_multiplier_class} /> : <FontAwesomeIcon icon={faVolumeUp} className={icon_multiplier_class} />}
@@ -42,8 +44,8 @@ const [muted, setMuted] = useState(false);
             “ {curQuoteText} ”
           </span>
         </div>
-          
-          {<FollowObjectDown />}
+
+          {<FollowObjectDown muted={muted}/>}
           <div style={{ position: 'fixed', bottom: '10px', right: '10px', fontSize: '12px', color: '#666' }}>
             Created by <a href="https://jonathangleyze.fr">jonathangleyze.fr</a>
           </div>

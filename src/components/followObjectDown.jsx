@@ -6,13 +6,24 @@
  * @returns {JSX.Element} The JSX element containing the skull image.
  */
 import skull from '../assets/skull.svg';
-import {useRef } from 'react';
+import skullOne from '../assets/skullOne.svg';
+import SondSwitch from '../assets/magical-reveal-start.ogg'
+import {useRef, useState } from 'react';
 
 import followMouse from '../utils/followMouse.jsx';
 
-const FollowObjectDown = () => {
+const FollowObjectDown = ({muted}) => {
+    const [isSkullOne, setIsSkullOne] = useState(false);
     // Ref for the skull image
     const skullRef = useRef();
+
+    const HandleClickSkull = () => {
+        setIsSkullOne(!isSkullOne);
+        if(!muted){
+            const audio = new Audio(SondSwitch);
+            audio.play();
+        }
+    }
 
     // Handle image load to initialize followMouse
     const handleImageLoad = () => {
@@ -26,8 +37,8 @@ const FollowObjectDown = () => {
 
     // Render the component
     return (
-        <div className="followObjectDown">
-            <img src={skull} alt='skull img' ref={skullRef} onLoad={handleImageLoad}/>
+        <div className="followObjectDown"  onClick={HandleClickSkull}>
+            <img src={isSkullOne ? skullOne : skull} alt='skull img' ref={skullRef} onLoad={handleImageLoad}/>
         </div>
         
     );
