@@ -3,14 +3,17 @@ import './styles/skull.css'
 import './styles/quoteBlock.css'
 import './styles/skeleton/header.css'
 
+import { useState } from 'react';
+
 import FollowObjectDown from './components/followObjectDown.jsx';
 import TopNotifier from './components/topNotifier.jsx';
+import DustFlow from './components/dustFlow.jsx';
+
 import copyQuote from './utils/copyQuote.jsx';
-import { useState } from 'react';
+import PlayClickSound from './utils/interactSond.jsx';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeOff, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
-import PlayClickSound from './utils/interactSond.jsx';
-import DustFlow from './components/dustFlow.jsx';
 
 const curQuoteText = `Look up at the stars and not down at your feet. Try to make sense of what you see, and wonder about what makes the universe exist. Be curious.`;
 
