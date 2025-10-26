@@ -12,7 +12,7 @@ import DustFlow from './components/dustFlow.jsx';
 
 import copyQuote from './utils/copyQuote.jsx';
 import PlayClickSound from './utils/interactSond.jsx';
-import curQuoteText from './quote.json';
+import curQuoteData from './quote.json';
 
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
 
   // Handle quote copy action
   function handleCopyQuote() {
-    copyQuote({quote: curQuoteText[curQuoteIndex], muted});
+    copyQuote({quote: curQuoteData[curQuoteIndex].quote, muted});
     setAlertText("Quote copied!");
     setNotifierTrigger(t => t + 1); 
   }
@@ -52,11 +52,11 @@ function App() {
               <FontAwesomeIcon icon={faChevronLeft} />
             </button>
           <div id='quoteContainer'>
-            <span id="quoteText" onClick={handleCopyQuote} >“ {curQuoteText[curQuoteIndex]} ”</span>
+            <span id="quoteText" onClick={handleCopyQuote} >“ {curQuoteData[curQuoteIndex].quote} ”</span>
           </div>
           <button 
-            className={curQuoteIndex < curQuoteText.length - 1 ? "arrowButton" : "arrowButton disabled"}
-            onClick={() => curQuoteIndex < curQuoteText.length - 1 ? setCurQuoteIndex(curQuoteIndex + 1) : null}>
+            className={curQuoteIndex < curQuoteData.length - 1 ? "arrowButton" : "arrowButton disabled"}
+            onClick={() => curQuoteIndex < curQuoteData.length - 1 ? setCurQuoteIndex(curQuoteIndex + 1) : null}>
               <FontAwesomeIcon icon={faChevronRight} />
             </button>
         </div>
