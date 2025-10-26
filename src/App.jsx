@@ -33,37 +33,58 @@ function App() {
   const icon_multiplier_class = "fa-2x";
   const icon_disabled_class = muted ? "mute-button sound_off" : "mute-button";
 
+  const QuoteType = (dataQuote) => {
+    switch(dataQuote.type) {
+      case "quote":
+        return `“ ${dataQuote.quote} ”`;
+      case "text":
+        return (
+          <div className="quoteText">
+            “ {dataQuote.title} ”
+            <button>voir plus</button>
+          </div>
+        );
+
+      default:
+        return "";
+    }
+  };
   
   return (
     <>
-      {<> 
-        <DustFlow />
-        <div className="header">
-          <button onClick={() => (setMuted(!muted), PlayClickSound())} className={icon_disabled_class}>
-            {muted ?  <FontAwesomeIcon icon={faVolumeOff} className={icon_multiplier_class} /> : <FontAwesomeIcon icon={faVolumeUp} className={icon_multiplier_class} />}
-          </button>
-        </div>
-        <div id='QuoteBlock'>
-          <span id='AlertText'>{<TopNotifier message={AlertText} trigger={notifierTrigger}/>}</span>
-          
-          <button 
-            className={curQuoteIndex > 0 ? "arrowButton" : "arrowButton disabled"}
-            onClick={() => curQuoteIndex > 0 ? setCurQuoteIndex(curQuoteIndex - 1) : null}>
-              <FontAwesomeIcon icon={faChevronLeft} />
-            </button>
-          <div id='quoteContainer'>
-            <span id="quoteText" onClick={handleCopyQuote} >“ {curQuoteData[curQuoteIndex].quote} ”</span>
-          </div>
-          <button 
-            className={curQuoteIndex < curQuoteData.length - 1 ? "arrowButton" : "arrowButton disabled"}
-            onClick={() => curQuoteIndex < curQuoteData.length - 1 ? setCurQuoteIndex(curQuoteIndex + 1) : null}>
-              <FontAwesomeIcon icon={faChevronRight} />
-            </button>
-        </div>
+      {
+        <> 
+          {/* interact elements */}
+          <DustFlow />
+          <FollowObjectDown muted={muted}/>
 
-          {<FollowObjectDown muted={muted}/>}
+          {/* content */}
+          <div className="header">
+            <button onClick={() => (setMuted(!muted), PlayClickSound())} className={icon_disabled_class}>
+              {muted ?  <FontAwesomeIcon icon={faVolumeOff} className={icon_multiplier_class} /> : <FontAwesomeIcon icon={faVolumeUp} className={icon_multiplier_class} />}
+            </button>
+          </div>
+          <div id='QuoteBlock'>
+            <span id='AlertText'>{<TopNotifier message={AlertText} trigger={notifierTrigger}/>}</span>
+            <button 
+              className={curQuoteIndex > 0 ? "arrowButton" : "arrowButton disabled"}
+              onClick={() => curQuoteIndex > 0 ? setCurQuoteIndex(curQuoteIndex - 1) : null}>
+                <FontAwesomeIcon icon={faChevronLeft} />
+            </button>
+            <div id='quoteContainer'>
+              <span id="quoteText" onClick={handleCopyQuote}>
+                {QuoteType(curQuoteData[curQuoteIndex])}
+              </span>
+            </div>
+            <button 
+              className={curQuoteIndex < curQuoteData.length - 1 ? "arrowButton" : "arrowButton disabled"}
+              onClick={() => curQuoteIndex < curQuoteData.length - 1 ? setCurQuoteIndex(curQuoteIndex + 1) : null}>
+                <FontAwesomeIcon icon={faChevronRight} />
+            </button>
+          </div>
+          
           <div style={{ position: 'fixed', bottom: '10px', right: '10px', fontSize: '12px', color: '#666' }}>
-            Created by <a href="https://jonathangleyze.fr">jonathangleyze.fr</a>
+              Created by <a href="https://jonathangleyze.fr">jonathangleyze.fr</a>
           </div>
         </>
       }
