@@ -76,7 +76,7 @@ function App() {
           {/* interact elements */}
           <DustFlow />
           <FollowObjectDown muted={muted}/>
-          {fullPageOpen && <FullPage text={curQuoteData[curQuoteIndex].text} title={curQuoteData[curQuoteIndex]["type"]} />}
+          {fullPageOpen && <FullPage text={curQuoteData[curQuoteIndex].text} title={curQuoteData[curQuoteIndex]["title"]} />}
 
           {/* content */}
           <div className="header">
