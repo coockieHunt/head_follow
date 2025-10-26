@@ -5,7 +5,7 @@ import './styles/skeleton/header.css'
 
 import { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeOff, faVolumeUp, faChevronLeft, faChevronRight} from "@fortawesome/free-solid-svg-icons";
+import { faVolumeMute, faVolumeUp, faChevronLeft, faChevronRight, faClose} from "@fortawesome/free-solid-svg-icons";
 import FollowObjectDown from './components/followObjectDown.jsx';
 import TopNotifier from './components/topNotifier.jsx';
 import DustFlow from './components/dustFlow.jsx';
@@ -21,6 +21,7 @@ function App() {
   const [notifierTrigger, setNotifierTrigger] = useState(0);
   const [muted, setMuted] = useState(false);
   const [curQuoteIndex, setCurQuoteIndex] = useState(0);
+  const [fullPageOpen, setFullPageOpen] = useState(false);
 
   // Handle quote copy action
   function handleCopyQuote() {
@@ -29,13 +30,12 @@ function App() {
     setNotifierTrigger(t => t + 1); 
   }
 
-  // const viaruable
+  // const variable
   const icon_multiplier_class = "fa-2x";
   const icon_disabled_class = muted ? "mute-button sound_off" : "mute-button";
 
-  const DisplayOnFullPage = (text) => {
-    console.log(text);
-    // Implementation for full page display
+  const DisplayOnFullPage = () => {
+    setFullPageOpen(true);
   }
 
   const QuoteType = (dataQuote) => {
@@ -49,7 +49,8 @@ function App() {
       case "text":
         return (
           <div className="quotedisplay">
-            “ {dataQuote.title} ”
+            <h2>{dataQuote.title}</h2>
+            <p>{dataQuote.text.substring(0, 100)}...</p>
             <button onClick={() => DisplayOnFullPage(dataQuote.text)}>voir plus</button>
           </div>
         );
@@ -57,6 +58,16 @@ function App() {
         return <span style={{ color: 'red' }}>[Unsupported quote type]</span>;
     }
   };
+
+  const FullPage = ({ text, title }) => {
+    return(
+      <div className="FullPage" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.8)', color: '#fff', padding: '20px', overflow: 'auto', zIndex: 9999999999999 }}>
+        <button onClick={() => setFullPageOpen(false)} style={{ backgroundColor: 'transparent', color: '#fff', border: 'none', cursor: 'pointer', fontSize: '18px' }}><FontAwesomeIcon icon={faClose} /></button>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+    ) ;
+  }
   
   return (
     <>
@@ -65,11 +76,12 @@ function App() {
           {/* interact elements */}
           <DustFlow />
           <FollowObjectDown muted={muted}/>
+          {fullPageOpen && <FullPage text={curQuoteData[curQuoteIndex].text} title={curQuoteData[curQuoteIndex]["type"]} />}
 
           {/* content */}
           <div className="header">
             <button onClick={() => (setMuted(!muted), PlayClickSound())} className={icon_disabled_class}>
-              {muted ?  <FontAwesomeIcon icon={faVolumeOff} className={icon_multiplier_class} /> : <FontAwesomeIcon icon={faVolumeUp} className={icon_multiplier_class} />}
+              {muted ?  <FontAwesomeIcon icon={faVolumeMute} className={icon_multiplier_class} /> : <FontAwesomeIcon icon={faVolumeUp} className={icon_multiplier_class} />}
             </button>
           </div>
           <div id='QuoteBlock'>
@@ -80,7 +92,8 @@ function App() {
                 <FontAwesomeIcon icon={faChevronLeft} />
             </button>
             <div id='quoteContainer'>
-              <span id="quoteText" onClick={handleCopyQuote}>
+              <span id="quoteText" onClick={curQuoteData[curQuoteIndex].type === "quote" ? handleCopyQuote : null}>
+                
                 {QuoteType(curQuoteData[curQuoteIndex])}
               </span>
             </div>
