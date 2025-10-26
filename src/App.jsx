@@ -33,6 +33,11 @@ function App() {
   const icon_multiplier_class = "fa-2x";
   const icon_disabled_class = muted ? "mute-button sound_off" : "mute-button";
 
+  const DisplayOnFullPage = (text) => {
+    console.log(text);
+    // Implementation for full page display
+  }
+
   const QuoteType = (dataQuote) => {
     switch(dataQuote.type) {
       case "quote":
@@ -45,7 +50,7 @@ function App() {
         return (
           <div className="quotedisplay">
             “ {dataQuote.title} ”
-            <button>voir plus</button>
+            <button onClick={() => DisplayOnFullPage(dataQuote.text)}>voir plus</button>
           </div>
         );
       default:

@@ -15,7 +15,7 @@ The `src/quote.json` file contains an array of objects. Each object can represen
 ```json
 {
 	"title": "Les sœur jumelle de la compréhension",
-	"texte": "Aussi loin que je me souvienne, j’ai toujours apprécié la science. ..."
+	"text": "Aussi loin que je me souvienne, j’ai toujours apprécié la science. ..."
 }
 ```
 
