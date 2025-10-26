@@ -36,10 +36,14 @@ function App() {
   const QuoteType = (dataQuote) => {
     switch(dataQuote.type) {
       case "quote":
-        return `“ ${dataQuote.quote} ”`;
+        return (
+          <div className="quotedisplay">
+            “ {dataQuote.quote} ”
+          </div>
+        );
       case "text":
         return (
-          <div className="quoteText">
+          <div className="quotedisplay">
             “ {dataQuote.title} ”
             <button>voir plus</button>
           </div>
