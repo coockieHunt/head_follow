@@ -1,6 +1,19 @@
+# Screen Component
+
+The `Screen` component is a simple wrapper for centering content and filling the viewport.
+
+## Usage
+
+Import and use in your React app:
+You can customize the styles in `src/screen/screen.css`.
+
+
 # Quote Display App
 
 A simple React application for displaying quotes with interactive mouse-following animations.
+
+## Screen
+![Alt text](./screen/screen.png?raw=true "Optional Title")
 
 ## Features
 
@@ -38,10 +51,6 @@ npm run build
 
 ## Todo List
 - add loading animation
-
-- Add smooth dust animation
-
-- Add auto-scroll to the next/previous button
 
 - Add expandable quotes for long texts
 
