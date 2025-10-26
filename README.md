@@ -1,3 +1,27 @@
+# Quote JSON Format
+
+The `src/quote.json` file contains an array of objects. Each object can represent either a simple quote or a more detailed entry with a title and text.
+
+## Examples
+
+### Simple Quote
+```json
+{
+	"quote": "Science is a way of thinking much more than it is a body of knowledge."
+}
+```
+
+### Title and Text Entry
+```json
+{
+	"title": "Les sœur jumelle de la compréhension",
+	"texte": "Aussi loin que je me souvienne, j’ai toujours apprécié la science. ..."
+}
+```
+
+## Usage in App
+- If an entry contains a `quote` property, the app displays it as a quote.
+- If an entry contains a `title` (and no `quote`), the app displays the title only.
 # Screen Component
 
 The `Screen` component is a simple wrapper for centering content and filling the viewport.

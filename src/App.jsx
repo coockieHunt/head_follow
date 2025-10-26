@@ -13,7 +13,6 @@ import DustFlow from './components/dustFlow.jsx';
 import copyQuote from './utils/copyQuote.jsx';
 import PlayClickSound from './utils/interactSond.jsx';
 import curQuoteData from './quote.json';
-import { color } from 'three/tsl';
 
 
 function App() {
