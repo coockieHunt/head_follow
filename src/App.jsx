@@ -129,7 +129,7 @@ function App() {
       {fullPageOpen ? <QuoteLong /> : <QuoteSimple />}
 
       <div className="footer">
-        Created by <a href="https://jonathangleyze.fr">jonathangleyze.fr</a>
+        App <a href='https://github.com/coockieHunt/quoteViewerSkull'>quoteViewerSkull</a> Created by <a href="https://jonathangleyze.fr">jonathangleyze.fr</a>
       </div>
     </>
   );
