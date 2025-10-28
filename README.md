@@ -94,3 +94,4 @@ Image by <a href="https://pixabay.com/users/openclipart-vectors-30363/?utm_sourc
 ## Icons
 
 - FontAwesome <a href="https://fontawesome.com/"> here </a>
+- favicon by SVG Repo <a href="https://www.svgrepo.com/svg/478631/fountain-pen"> here </a>

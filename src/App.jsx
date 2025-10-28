@@ -108,6 +108,13 @@ function App() {
   
   return (
     <>
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/favicon-96x96.png" />
+      <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+      <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png" />
+      <link rel="icon" type="image/png" sizes="512x512" href="/web-app-manifest-512x512.png" />
+
       <DustFlow />
       <FollowObjectDown muted={muted}/>
       
