@@ -23,4 +23,17 @@ function PlayClickSound() {
     osc.stop(now + 0.2);
 }
 
-export default PlayClickSound;
+function PlayOggSound(soundFile, volume = 1.0, singleInstance = true) {
+    const audio = new Audio(soundFile);
+    audio.volume = volume;
+    audio.play();
+    console.log("Playing sound:", soundFile, "at volume:", volume, "singleInstance:", singleInstance);
+    if (singleInstance) {
+        audio.addEventListener('ended', () => {
+            audio.currentTime = 0;
+            audio.pause();
+        });
+    }
+}
+
+export { PlayClickSound, PlayOggSound };

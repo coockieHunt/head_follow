@@ -2,16 +2,17 @@ import './App.css';
 import './styles/skull.css'
 import './styles/quoteBlock.css'
 import './styles/skeleton/header.css'
+import './styles/skeleton/footer.css'
 
 import { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faVolumeMute, faVolumeUp, faChevronLeft, faChevronRight, faClose} from "@fortawesome/free-solid-svg-icons";
+import { faVolumeMute, faVolumeUp, faChevronLeft, faChevronRight, faClose, faCopy} from "@fortawesome/free-solid-svg-icons";
 import FollowObjectDown from './components/followObjectDown.jsx';
 import TopNotifier from './components/topNotifier.jsx';
 import DustFlow from './components/dustFlow.jsx';
 
 import copyQuote from './utils/copyQuote.jsx';
-import PlayClickSound from './utils/interactSond.jsx';
+import {PlayClickSound} from './utils/interactSond.jsx';
 import curQuoteData from './quote.json';
 
 
@@ -24,8 +25,8 @@ function App() {
   const [fullPageOpen, setFullPageOpen] = useState(false);
 
   // Handle quote copy action
-  function handleCopyQuote() {
-    copyQuote({quote: curQuoteData[curQuoteIndex].quote, muted});
+  function handleCopyQuote(textCopy) {
+    copyQuote({ quote: textCopy, muted });
     setAlertText("Quote copied!");
     setNotifierTrigger(t => t + 1); 
   }
@@ -34,24 +35,24 @@ function App() {
   const icon_multiplier_class = "fa-2x";
   const icon_disabled_class = muted ? "mute-button sound_off" : "mute-button";
 
-  const DisplayOnFullPage = () => {
-    setFullPageOpen(true);
-  }
-
+  // Render quote based on its type
   const QuoteType = (dataQuote) => {
     switch(dataQuote.type) {
       case "quote":
         return (
-          <div className="quotedisplay">
-            “ {dataQuote.quote} ”
+          <div>
+            <p className='short'> 
+              “ {dataQuote.quote} ”
+            </p>
+           
           </div>
         );
       case "text":
         return (
-          <div className="quotedisplay">
+          <div>
             <h2>{dataQuote.title}</h2>
-            <p>{dataQuote.text.substring(0, 100)}...</p>
-            <button onClick={() => DisplayOnFullPage(dataQuote.text)}>voir plus</button>
+            <p className='long'>{dataQuote.text.substring(0, 200)}...</p>
+            <button onClick={() =>  setFullPageOpen(true)}>voir plus</button>
           </div>
         );
       default:
@@ -59,41 +60,37 @@ function App() {
     }
   };
 
-  const FullPage = ({ text, title }) => {
-    return(
-      <div className="FullPage" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0, 0, 0, 0.8)', color: '#fff', padding: '20px', overflow: 'auto', zIndex: 9999999999999 }}>
-        <button onClick={() => setFullPageOpen(false)} style={{ backgroundColor: 'transparent', color: '#fff', border: 'none', cursor: 'pointer', fontSize: '18px' }}><FontAwesomeIcon icon={faClose} /></button>
-        <h2>{title}</h2>
-        <p>{text}</p>
+  // Components for quote display
+  const QuoteLong = () => {
+    return(        
+      <div id='QuoteBlock' className='max'>
+        <div className="FullPage">
+          <div className="top">
+            <button onClick={() => setFullPageOpen(false)}><FontAwesomeIcon icon={faClose} /></button>
+            <h2>{curQuoteData[curQuoteIndex].title}</h2>
+            <button onClick={() => handleCopyQuote(curQuoteData[curQuoteIndex].text)}><FontAwesomeIcon icon={faCopy} /></button>
+          </div>
+          <div className='content'>
+            <p>{curQuoteData[curQuoteIndex].text}</p>
+          </div>
+            
+        </div>
       </div>
     ) ;
   }
-  
-  return (
-    <>
-      {
-        <> 
-          {/* interact elements */}
-          <DustFlow />
-          <FollowObjectDown muted={muted}/>
-          {fullPageOpen && <FullPage text={curQuoteData[curQuoteIndex].text} title={curQuoteData[curQuoteIndex]["title"]} />}
 
-          {/* content */}
-          <div className="header">
-            <button onClick={() => (setMuted(!muted), PlayClickSound())} className={icon_disabled_class}>
-              {muted ?  <FontAwesomeIcon icon={faVolumeMute} className={icon_multiplier_class} /> : <FontAwesomeIcon icon={faVolumeUp} className={icon_multiplier_class} />}
-            </button>
-          </div>
-          <div id='QuoteBlock'>
-            <span id='AlertText'>{<TopNotifier message={AlertText} trigger={notifierTrigger}/>}</span>
-            <button 
-              className={curQuoteIndex > 0 ? "arrowButton" : "arrowButton disabled"}
-              onClick={() => curQuoteIndex > 0 ? setCurQuoteIndex(curQuoteIndex - 1) : null}>
-                <FontAwesomeIcon icon={faChevronLeft} />
-            </button>
+  // Simple quote display
+  const QuoteSimple = () => {
+    return(
+      <>
+          <div id='QuoteBlock' className='min'>
+              <button 
+                className={curQuoteIndex > 0 ? "arrowButton" : "arrowButton disabled"}
+                onClick={() => curQuoteIndex > 0 ? setCurQuoteIndex(curQuoteIndex - 1) : null}>
+                  <FontAwesomeIcon icon={faChevronLeft} />
+              </button>
             <div id='quoteContainer'>
-              <span id="quoteText" onClick={curQuoteData[curQuoteIndex].type === "quote" ? handleCopyQuote : null}>
-                
+              <span onClick={curQuoteData[curQuoteIndex].type === "quote" ? () => handleCopyQuote(curQuoteData[curQuoteIndex].quote) : null}>
                 {QuoteType(curQuoteData[curQuoteIndex])}
               </span>
             </div>
@@ -103,12 +100,28 @@ function App() {
                 <FontAwesomeIcon icon={faChevronRight} />
             </button>
           </div>
-          
-          <div style={{ position: 'fixed', bottom: '10px', right: '10px', fontSize: '12px', color: '#666' }}>
-              Created by <a href="https://jonathangleyze.fr">jonathangleyze.fr</a>
-          </div>
         </>
-      }
+    );
+  }
+  
+  return (
+    <>
+      <DustFlow />
+      <FollowObjectDown muted={muted}/>
+      
+      <div className="header">
+        <h1>Quote App</h1>
+        <span id='AlertText'>{<TopNotifier message={AlertText} trigger={notifierTrigger}/>}</span>
+        <button onClick={() => (setMuted(!muted), PlayClickSound())} className={icon_disabled_class}>
+          {muted ?  <FontAwesomeIcon icon={faVolumeMute} className={icon_multiplier_class} /> : <FontAwesomeIcon icon={faVolumeUp} className={icon_multiplier_class} />}
+        </button>
+      </div>
+
+      {fullPageOpen ? <QuoteLong /> : <QuoteSimple />}
+
+      <div className="footer">
+        Created by <a href="https://jonathangleyze.fr">jonathangleyze.fr</a>
+      </div>
     </>
   );
 }

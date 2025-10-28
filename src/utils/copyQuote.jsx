@@ -7,12 +7,11 @@
  * 
  */
 import WriteSong from '../assets/write.ogg';
+import {PlayOggSound} from './interactSond.jsx';
 
 function copyQuote({quote, muted = false}) {
-  // Use the Clipboard API to copy the quote text
   navigator.clipboard.writeText(quote).then(() => {
-    const audio = new Audio(WriteSong);
-    if (!muted) {audio.play();}
+    !muted && PlayOggSound(WriteSong, 1.0, true);
   }).catch(err => {console.error('Error copying quote: ', err);});
 }
 

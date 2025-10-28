@@ -10,6 +10,9 @@ import skullOne from '../assets/skullOne.svg';
 import SondSwitch from '../assets/magical-reveal-start.ogg'
 import {useRef, useState } from 'react';
 
+import {PlayOggSound} from '../utils/interactSond.jsx';
+
+
 import followMouse from '../utils/followMouse.jsx';
 
 const FollowObjectDown = ({muted}) => {
@@ -19,11 +22,7 @@ const FollowObjectDown = ({muted}) => {
 
     const HandleClickSkull = () => {
         setIsSkullOne(!isSkullOne);
-        if(!muted){
-            const audio = new Audio(SondSwitch);
-            audio.volume = 0.2;
-            audio.play();
-        }
+        if(!muted) PlayOggSound(SondSwitch, 0.2, true);
     }
 
     // Handle image load to initialize followMouse

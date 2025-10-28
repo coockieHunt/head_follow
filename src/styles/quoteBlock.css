@@ -1,17 +1,121 @@
 #QuoteBlock {
     position: absolute;
     top: 50%;
-    left: 50%;
     transform: translate(-50%, -50%) scale(1);
     transform-origin: center;
     text-align: center;
     font-size: 24px;
-    max-width: 600px;
     cursor: pointer;
-
+    
     display: flex;
     align-items: center;
+    width: 80%;
+    max-width: 600px;
+    left: 50%;
+    z-index: 99999;
+
+    transition: all 0.5s ease;
+
+    p.short {
+        font-size: 20px;
+        font-weight: 500;
+        color: #333;
+        margin: 0 20px;
+    }
+
+    p.long {
+        font-size: 18px;
+        font-weight: 400;
+        color: #444;
+        margin: 0 20px;
+        text-align: left;
+    }
+
+
+    &.max{
+        background-color: rgba(247, 247, 247, 0.658);
+        height: 80%;
+        width: 70%;
+        max-width: none;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    & .FullPage{
+        height: 100%;
+        width: 100%;
+        max-width: none;
+        top: 0%;
+        left: 0%;
+        transform: translate(0%, 0%) scale(1);
+        overflow-x: hidden;
+        overflow-y: auto;   
+
+
+        position: relative;
+        & .content{
+            margin: 20px;
+            text-align: left;
+
     
+
+            & p{
+               text-align: justify;
+                text-justify: inter-word;
+                line-height: 1.8;         
+                letter-spacing: 0.2px;   
+                word-spacing: 0.5px;      
+                font-size: 18px;        
+                font-weight: 400;      
+                color: #222;             
+                padding: 0 40px;        
+                margin: 0 auto;
+            }
+
+            & h2{
+                margin-bottom: 20px;
+                text-align: center;
+            }
+        }
+
+        & .top{
+            background-color: rgb(219, 219, 219);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+
+            & h2{
+                margin: 0;
+                font-size: 20px;
+                flex-grow: 1;
+                text-align: center;
+            }
+
+            & button{
+                background: none;
+                border: none;
+                cursor: pointer;
+                width: auto;
+                height: 100%;
+
+                & svg{
+                    font-size: 20px;
+                    color: rgba(0, 0, 0, 0.6);
+                    transition: color 0.3s ease;
+
+                    &:hover{
+                        color: rgba(0, 0, 0, 0.8);
+                    }
+                }
+            }
+        }
+
+    }
+
     & #quoteContainer {
        margin: 0 20px;
        display: flex;
@@ -36,37 +140,5 @@
     }
 
 
-    & #AlertText{
-        position: absolute;
-        top: -40px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 16px;
-        opacity: 1;
-        transition: opacity 0.5s ease-in-out;
 
-        &.visible {opacity: 1;}
-
-    }
-
-    & .topNotifier {
-        user-select: none;
-        transition: opacity 0.5s ease-in-out, top 0.5s ease-in-out;
-        position: relative;
-        display: block;
-        color: rgba(0, 0, 0, 0.521);
-        font-size: 14px;
-        font-weight: bold;
-        margin-bottom: 5px;
-
-        &.visible_TopNotifier {
-            opacity: 1;
-            top: 0px;
-        }
-
-        &.hidden_TopNotifier {
-            opacity: 0;
-            top: 10px;
-        }
-    }
 }
