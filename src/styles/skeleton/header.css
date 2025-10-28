@@ -21,7 +21,6 @@
         transition: opacity 0.5s ease-in-out;
 
         &.visible {opacity: 1;}
-
     }
 
     & .topNotifier {
@@ -33,15 +32,29 @@
         font-size: 14px;
         font-weight: bold;
         margin-bottom: 5px;
+        @media (max-width: 768px) {
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
 
         &.visible_TopNotifier {
+
+
             opacity: 1;
             top: 5px;
+
+            @media (max-width: 768px) {
+                background-color: white;
+            }
         }
 
         &.hidden_TopNotifier {
             opacity: 0;
             top: 0px;
+
+            @media (max-width: 768px) {
+                background-color: none;
+            }
         }
     }
 }
