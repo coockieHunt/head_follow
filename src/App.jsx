@@ -13,7 +13,8 @@ import DustFlow from './components/dustFlow.jsx';
 
 import copyQuote from './utils/copyQuote.jsx';
 import {PlayClickSound} from './utils/interactSond.jsx';
-import curQuoteData from './quote.json';
+import curQuoteData from './data/quote.json';
+import config from './data/config.json';
 
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
   // Handle quote copy action
   function handleCopyQuote(textCopy) {
     copyQuote({ quote: textCopy, muted });
-    setAlertText("Quote copied!");
+    setAlertText(config.copy_success_message);
     setNotifierTrigger(t => t + 1); 
   }
 
@@ -51,7 +52,7 @@ function App() {
         return (
           <div>
             <h2>{dataQuote.title}</h2>
-            <p className='long'>{dataQuote.text.substring(0, 200)}...</p>
+            <p className='long'>{dataQuote.text.substring(0, config.max_quote_length)}...</p>
             <button onClick={() =>  setFullPageOpen(true)}>voir plus</button>
           </div>
         );
@@ -83,6 +84,7 @@ function App() {
   const QuoteSimple = () => {
     return(
       <>
+          <title>{config.title_app}</title>
           <div id='QuoteBlock' className='min'>
               <button 
                 className={curQuoteIndex > 0 ? "arrowButton" : "arrowButton disabled"}
@@ -110,7 +112,7 @@ function App() {
       <FollowObjectDown muted={muted}/>
       
       <div className="header">
-        <h1>Quote App</h1>
+        <h1>{config.title_page}</h1>
         <span id='AlertText'>{<TopNotifier message={AlertText} trigger={notifierTrigger}/>}</span>
         <button onClick={() => (setMuted(!muted), PlayClickSound())} className={icon_disabled_class}>
           {muted ?  <FontAwesomeIcon icon={faVolumeMute} className={icon_multiplier_class} /> : <FontAwesomeIcon icon={faVolumeUp} className={icon_multiplier_class} />}
